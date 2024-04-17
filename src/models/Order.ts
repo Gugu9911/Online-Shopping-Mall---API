@@ -1,7 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 import { Order } from '../types/Order';
-import { OrderItemSchema } from './OrderItem';
 
 
 

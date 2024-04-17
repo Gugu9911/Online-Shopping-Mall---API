@@ -1,7 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 import { OrderItem } from '../types/Order';
-import Product, { ProductDocument } from './Product';
 
 
 export const OrderItemSchema = new Schema({

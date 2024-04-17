@@ -1,15 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import mongoose from 'mongoose';
-
-import {
-  ApiError,
-  BadRequest,
-  ForbiddenError,
-  InternalServerError,
-  NotFoundError,
-} from '../errors/ApiError';
-
-import OrderItem,{OrderItemDocument} from '../models/OrderItem';
+import { InternalServerError } from '../errors/ApiError';
+import OrderItem from '../models/OrderItem';
 import orderItemService from '../services/orderItemService';
 import orderServive from '../services/orderService';
 

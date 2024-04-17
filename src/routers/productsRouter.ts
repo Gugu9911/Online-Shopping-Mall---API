@@ -1,13 +1,13 @@
 import express from "express";
+import { getAllProducts, createProduct, deleteProduct, updateProduct, getProductByname } from "../controllers/products";
 
-import { Filters, Product, Query } from "../types/Product";
-import { productsGetter, createProduct, deleteProduct } from "../controllers/products";
-import adminCheck from "../middlewares/adminCheck";
 
 const router = express.Router();
 
-router.get("/", productsGetter);
-router.post("/", adminCheck, createProduct);
-router.delete("/:productId", adminCheck, deleteProduct);
+router.get("/", getAllProducts);
+router.get("/:productId", getProductByname);
+router.put("/:productId", updateProduct);
+router.post("/", createProduct);
+router.delete("/:productId", deleteProduct);
 
 export default router;

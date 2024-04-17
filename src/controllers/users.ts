@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import User from "../models/User";
 import { InternalServerError } from "../errors/ApiError";
 import usersService from "../services/userService";

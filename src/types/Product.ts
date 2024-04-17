@@ -1,22 +1,8 @@
-export interface Product {
-  id: string;
-  title: string;
+import { Category } from "./Category";
+
+export type Product = {
+  name: string;
   price: number;
   description: string;
   category: Category;
-}
-
-export interface Category {
-  createdAt: string;
-  id: string;
-}
-
-export interface Filters {
-  title?: string;
-  categoryId?: string;
-}
-export interface Query extends Filters {
-  offset?: number;
-  limit?: number;
-  pid?: string;
 }
