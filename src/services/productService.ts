@@ -26,4 +26,10 @@ export const findProductsByCategory = async (categoryId: string): Promise<Produc
     return Product.find({category: categoryId});
 }
 
-export default {getAllProducts, getOneProduct, createProduct, updateProduct, deleteProduct, findProductsByCategory};
+export const findProductsByName = async (name: string): Promise<ProductDocument[]> => {
+    return Product.find({ name: { $regex: new RegExp(name, 'i') } });
+}
+
+
+
+export default {getAllProducts, getOneProduct, createProduct, updateProduct, deleteProduct, findProductsByCategory, findProductsByName};

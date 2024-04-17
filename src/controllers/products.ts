@@ -70,3 +70,13 @@ export async function getProductsByCategory(request: Request, response: Response
     next(new InternalServerError());
   }
 }
+
+export async function getProductsByName(request: Request, response: Response, next: NextFunction) {
+  try {
+    const products = await productsService.findProductsByName(request.params.name);
+    response.status(200).json(products);
+  } catch (error) {
+    next(new InternalServerError());
+  }
+}
+
