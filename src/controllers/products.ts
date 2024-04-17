@@ -48,7 +48,7 @@ export async function getAllProducts(_: Request, response: Response, next: NextF
   }
 }
 
-export async function getProductByname(request: Request, response: Response, next: NextFunction) {
+export async function getProductById(request: Request, response: Response, next: NextFunction) {
   try {
     const product = await productsService.getOneProduct(request.params.productId);
     if (!product) {
@@ -64,10 +64,9 @@ export async function getProductByname(request: Request, response: Response, nex
 export async function getProductsByCategory(request: Request, response: Response, next: NextFunction) {
   try {
     const products = await productsService.findProductsByCategory(request.params.categoryId);
+    console.log(products,"productsController");
     response.status(200).json(products);
   } catch (error) {
     next(new InternalServerError());
   }
 }
-
-

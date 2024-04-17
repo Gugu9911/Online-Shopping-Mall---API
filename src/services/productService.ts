@@ -21,6 +21,8 @@ export const deleteProduct = async (productId: string): Promise<ProductDocument 
 }
 
 export const findProductsByCategory = async (categoryId: string): Promise<ProductDocument[]> => {
+    console.log(categoryId);
+    console.log(Product.find({category: categoryId}), "findProductsByCategoryService");
     return Product.find({category: categoryId});
 }
 

@@ -14,4 +14,4 @@ transformSchema(CategorySchema);
 
 export type CategoryDocument = Document & Category;
 
-export default mongoose.model<CategoryDocument>("Categories", CategorySchema);
+export default mongoose.model<CategoryDocument>("Category", CategorySchema);
