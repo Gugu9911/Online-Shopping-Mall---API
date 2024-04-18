@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 import { Order } from '../types/Order';
+import { transformSchema } from "../utils/transform";
 
 
 
@@ -21,6 +22,8 @@ export const OrderSchema = new Schema({
     type: String
   }
 });
+
+transformSchema(OrderSchema);
 
 export type OrderDocument = Document & Order;
 
