@@ -4,7 +4,7 @@ import productsService from "../services/productService";
 import Product from "../models/Product";
 
 export async function createProduct(request: Request, response: Response, next: NextFunction) {
-  try {
+  try { 
     const newProduct = new Product(request.body);
     const product = await productsService.createProduct(newProduct);
     response.status(201).json(product);

@@ -128,7 +128,7 @@ export async function login(request: Request, response: Response, next: NextFunc
     // Create and return a JWT token. then store the token in local storage in frontend
     const JWT_SECRET = process.env.JWT_SECRET as string;
     console.log(JWT_SECRET, "jwt");
-    const token = jwt.sign({ email: user.email, id: user._id }, JWT_SECRET, { expiresIn: "3h" });
+    const token = jwt.sign({ email: user.email, id: user._id }, JWT_SECRET, { expiresIn: "24h" });
     response.status(200).json(token);
 
   } catch (error) {
