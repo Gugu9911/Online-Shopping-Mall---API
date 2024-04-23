@@ -17,9 +17,6 @@ export const OrderSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now()
-  },
-  shippingAddress: {
-    type: String
   }
 });
 

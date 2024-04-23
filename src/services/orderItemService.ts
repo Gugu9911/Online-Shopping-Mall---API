@@ -1,21 +1,31 @@
-import e from "express";
+import { NotFoundError } from "../utils/apiError";
 import OrderItem,{OrderItemDocument} from "../models/OrderItem";
 
 const createOrderItem = async (orderItem: OrderItemDocument): Promise<OrderItemDocument> => {
   return await orderItem.save();
 }
 
-const getOneOrderItem = async (orderItemId: string): Promise<OrderItemDocument | null> => {
-  const orderItem = await OrderItem.findById(orderItemId);
-  return orderItem;
+const deleteOrderItem = async (orderItemId: string): Promise<boolean> => {
+  try {
+    const deletedOrderItem = await
+    OrderItem
+    .findByIdAndDelete(orderItemId);
+    return !!deletedOrderItem;
+  } catch (error) {
+    throw new NotFoundError();
+  }
 }
 
-const getAllOrderItems = async (): Promise<OrderItemDocument[]> => {
-  return await OrderItem.find().exec();
-} 
-
-const deleteOrderItem = async (orderItemId: string): Promise<OrderItemDocument | null> => {
-  return await OrderItem.findByIdAndDelete(orderItemId).exec();
+const findOrderItemById = async (orderItemId: string): Promise<OrderItemDocument | null> => {
+  try {
+    return await OrderItem.findById(orderItemId).populate("product");
+  } catch (error) {
+    throw new NotFoundError();
+  }
 }
 
-export default { createOrderItem, deleteOrderItem,getOneOrderItem, getAllOrderItems};
+
+
+
+
+export default { createOrderItem, deleteOrderItem, findOrderItemById};

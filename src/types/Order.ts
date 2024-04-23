@@ -9,5 +9,5 @@ export type OrderItem = {
 export type Order = {
     user: User;
     items: OrderItem[];
-    shippingAddress: string;
+    createdAt: string;
   }
