@@ -13,3 +13,5 @@ if (!config.MONGODB_URI) {
   logger.error('MONGODB_URI is not defined in the environment variables');
   process.exit(1); 
 }
+
+export default config;
