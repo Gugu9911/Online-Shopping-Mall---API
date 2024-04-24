@@ -1,7 +1,7 @@
 
 import express from "express";
 import passport from "passport";
-import admincheck from "../middlewares/adminCheck";
+
 
 import { createUser, deleteUser, getUser, getAllUsers, updateUser,login,forgetPassword, changePassword, getUserProfileByToken } from "../controllers/users";
 
@@ -10,7 +10,7 @@ const router = express.Router();
 router.get("/", getAllUsers);
 
 router.get("/:userId", getUser);
-router.post("/profile", getUserProfileByToken);
+router.post("/profile", passport.authenticate("jwt", { session: false }), getUserProfileByToken);
 
 router.post("/", createUser);
 
