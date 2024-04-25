@@ -18,7 +18,7 @@
     "ts-node": "^10.9.2"
   },
   "scripts": {
-    "start": "NODE_ENV=production node app.ts",
+    "start": "NODE_ENV=production node dist/src/app.js",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
     "test": "jest --runInBand --forceExit --detectOpenHandles --coverage  --verbose false",
     "lint": "eslint .",
