@@ -1,61 +1,68 @@
-# ER diagram
+# Online Shopping Mall - Backend API
+
+This repository contains the backend code for the Online Shopping Mall - GroceryHub, an e-commerce platform. The backend is built with Express and provides RESTful APIs as per the provided Entity-Relationship Diagram (ERD).
 
 ![ER Diagram](readmePic/ER%20diagram.png)
 
-# Backend Assignment - API
+## Overview
 
-This is the README for an Express backend assignment that requires you to implement the REST APIs for an E-commerce based on the Entity-Relationship Diagram (ERD) assignment. The ERD assignment should outline the data model, including the relationships and attributes of entities within the system. You are tasked with designing and documenting the REST APIs according to the ERD specifications.
+The backend services are designed to support the operations of an e-commerce platform, including user management, product listings, and administrative functions. The API follows REST principles and supports CRUD operations on various entities as outlined by the ERD.
 
-## Introduction
+### Live Website
 
-This Express backend assignment involves building a RESTful API for an E-commerce. You are provided with an Entity-Relationship Diagram (ERD) assignment that outlines the data model, including the relationships and attributes of entities such as products, users, orders and admin roles.
+Access the live application here: [Online Shopping Mall](https://online-shopping-mall.vercel.app/)
 
-## Entity CRUD Operations
+### Frontend Repository
 
-`Before` implementing JWT authentication, `you are required to create the basic CRUD` (Create, Read, Update, Delete) operations for the entities based on the specifications provided in the ERD assignment. This section focuses on designing and implementing the core functionality to manage and interact with the specified entities.
+View the frontend repository on GitHub: [Online Shopping Mall - Frontend](https://github.com/Gugu9911/Online-Shopping-Mall---Frontend)
 
-## Authentication
+## Features
 
-For security, this API should implement user authentication using JSON Web Tokens (JWT). Each user should have a unique username and password OR broker authentication. Certain admin endpoints may require special privileges for access.
+### Entity CRUD Operations
 
-## Minimum requirements
+Before integrating JWT authentication, it can establish basic CRUD operations for entities such as products, users, and orders based on the ERD. This includes:
 
-The minimum requirements of the project.
+- Creating, reading, updating, and deleting products, users, and orders.
+- Admin functionalities to manage users and products.
 
-1. Products
+### Authentication
 
-- Attributes: ID, name, description, categories, variants/ sizes
-- Get list of all products with/without pagination
-- Get list of products, filtering (search) by: name, categories, variant
-- Get a product by ID
+Implement secure authentication using JSON Web Tokens (JWT) to manage user sessions and secure API access. This includes:
 
-2. Users
+- User registration and login.
+- Password recovery and update mechanisms.
+- Admin authentication for restricted endpoints.
 
-- Attributes: ID, first name, last name, email
-- Sign up a new user (username, password, first name, last name, email)
-- Sign in user with username/password
-- Update user profile (first name, last name, email)
-- Forget password request
-- Change password (username, old password, new password)
+### API Features:
 
-3. Admin
-   Special users with certain privileges
+#### Products
 
-- Add a new product, update info of a product, remove a product
-- Ban a user, unban a user
+- Attributes: ID, name, description, categories, variants/sizes.
+- Fetch all products, optionally with pagination.
+- Search products by name, category, or variant.
+- Retrieve a specific product by ID.
 
-## Response Format
+#### Users
 
-All API responses should be provided in JSON format. A typical response should include a `status`, `data`, and an optional `message` field. The `status` field should indicate the success or failure of the request.
+- Attributes: ID, first name, last name, email.
+- Register a new user.
+- User login with username and password.
+- Update user profile details.
+- Password recovery and reset functionalities.
 
-## Error Handling
+#### Admin
 
-The API should include comprehensive error handling with clear and informative error messages. Errors should be accompanied by appropriate HTTP status codes.
+- Enhanced privileges to add, update, or delete products.
+- Ability to ban or unban users.
+
+## Response and Error Handling
+
+All responses are in JSON format, including a `status`, `data`, and `message` (optional). Comprehensive error handling is implemented to provide clear feedback and appropriate HTTP status codes for different errors.
 
 ## Testing
 
-Developers should conduct unit tests and integration tests to ensure the reliability and correctness of the API. Instructions for running the tests should be provided in the project's documentation.
+Unit tests for Services had be conducted to ensure API reliability and correctness. Instructions for running tests should be detailed in the project documentation.
 
 ## Deployment
 
-The API should be deployed before the **`DEADLINE`**
+The API is deployed at: [Deploy with Render](https://online-shopping-mall-api.onrender.com)
