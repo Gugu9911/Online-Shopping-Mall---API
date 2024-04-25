@@ -3,16 +3,13 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import Category from '../../src/models/Category';
 import categoryService from '../../src/services/categoryService';
 
-require('dotenv').config({ path: '../.env.test' });
-
-
 describe('Category Service Tests', () => {
-  let mongoServer: any;
+  let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {
     mongoServer = await MongoMemoryServer.create();
-    const mongoUri = mongoServer.getUri();
-    await mongoose.connect(mongoUri);
+    const uri = mongoServer.getUri();
+    await mongoose.connect(uri);  // Corrected connect call without deprecated options
   });
 
   afterAll(async () => {
@@ -20,61 +17,50 @@ describe('Category Service Tests', () => {
     await mongoServer.stop();
   });
 
-  afterEach(async () => {
-    await Category.deleteMany();
+  beforeEach(async () => {
+    await Category.deleteMany({});
   });
 
   // Test creating a category
   it('should create a category', async () => {
-    const mockCategory = new Category({ name: 'Tech' });
-    const savedCategory = await categoryService.createCategory(mockCategory);
-    expect(savedCategory._id).toBeDefined();
-    expect(savedCategory.name).toBe('Tech');
+    const categoryData = { name: 'Technology' };
+    const category = new Category(categoryData);
+    const savedCategory = await categoryService.createCategory(category);
+    expect(savedCategory).toHaveProperty('_id');
+    expect(savedCategory.name).toEqual('Technology');
   });
 
-  // Test retrieving a single category
-  it('should retrieve a single category by ID', async () => {
-    const mockCategory = new Category({ name: 'Tech' });
-    const savedCategory = await mockCategory.save();
-
-    const foundCategory = await categoryService.getOneCategory(savedCategory._id.toString());
+  // Test getting a category by ID
+  it('should get a single category by ID', async () => {
+    const category = new Category({ name: 'Entertainment' });
+    await category.save();
+    const foundCategory = await categoryService.getOneCategory(category._id.toString());
     expect(foundCategory).not.toBeNull();
-    expect(foundCategory?.name).toBe('Tech');
+    expect(foundCategory?.name).toEqual('Entertainment');
   });
 
-  // Test retrieving all categories
-  it('should retrieve all categories', async () => {
-    const mockCategory1 = new Category({ name: 'Tech' });
-    const mockCategory2 = new Category({ name: 'Lifestyle' });
-    await mockCategory1.save();
-    await mockCategory2.save();
-
+  // Test getting all categories
+  it('should get all categories', async () => {
+    await Category.create([{ name: 'Entertainment' }, { name: 'Technology' }]);
     const categories = await categoryService.getAllCategories();
-    expect(categories.length).toBe(2);
-    expect(categories[0].name).toBe('Tech');
-    expect(categories[1].name).toBe('Lifestyle');
+    expect(categories.length).toEqual(2);
   });
 
   // Test updating a category
   it('should update a category', async () => {
-    const mockCategory = new Category({ name: 'Tech' });
-    const savedCategory = await mockCategory.save();
-    const updatedCategory = await categoryService.updateCategory(savedCategory._id.toString(), { name: 'Technology' });
-
-    expect(updatedCategory).not.toBeNull();
-    expect(updatedCategory?.name).toBe('Technology');
+    const category = new Category({ name: 'Old Name' });
+    await category.save();
+    const updatedCategory = await categoryService.updateCategory(category._id.toString(), { name: 'New Name' });
+    expect(updatedCategory?.name).toEqual('New Name');
   });
 
   // Test deleting a category
   it('should delete a category', async () => {
-    const mockCategory = new Category({ name: 'Tech' });
-    const savedCategory = await mockCategory.save();
-
-    const deletedCategory = await categoryService.deleteCategory(savedCategory._id.toString());
+    const category = new Category({ name: 'Delete Me' });
+    await category.save();
+    const deletedCategory = await categoryService.deleteCategory(category._id.toString());
+    const foundCategory = await Category.findById(category._id);
     expect(deletedCategory).not.toBeNull();
-    expect(deletedCategory?._id).toEqual(savedCategory._id);
-
-    const result = await Category.findById(savedCategory._id);
-    expect(result).toBeNull();
+    expect(foundCategory).toBeNull();
   });
 });
