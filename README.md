@@ -55,6 +55,11 @@ Implement secure authentication using JSON Web Tokens (JWT) to manage user sessi
 - Enhanced privileges to add, update, or delete products.
 - Ability to ban or unban users.
 
+#### Order & Order Item
+
+- Ability to Create, Update, Delete, Get
+
+
 ## Response and Error Handling
 
 All responses are in JSON format, including a `status`, `data`, and `message` (optional). Comprehensive error handling is implemented to provide clear feedback and appropriate HTTP status codes for different errors.
